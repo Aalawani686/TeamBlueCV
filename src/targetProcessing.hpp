@@ -5,12 +5,12 @@
 #include "target.hpp"
 using namespace cv;
 
-class targetProcessing
+class TargetProcessing
 {
     public:
 
-        targetProcessing();
-        void loadTarget(Target* target);
+        TargetProcessing();
+        void loadTarget(Target target);
         double Distance();
         double Azimuth();
         double Altitude();

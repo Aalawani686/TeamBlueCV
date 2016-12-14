@@ -1,13 +1,13 @@
 #include "targetDetector.hpp"
 
+
 targetDetector::targetDetector(){
 
 }
 
-Target targetDetector::processImage(Mat image, int num){}
+std::vector<cv::Point> targetDetector::processImage(Mat image, int num){
 
-    TargetProcessing tP;
-
+     Mat img_hsv;
      cvtColor(image, img_hsv, CV_BGR2HSV);
      std::vector<cv::Mat> channels;
      split(img_hsv, channels);
@@ -36,18 +36,16 @@ Target targetDetector::processImage(Mat image, int num){}
 
     double maxY = 0; // highest Y variable checker
     double totalX=0, totalY=0; // total X and Y of all points of output added together
-    int i=0, j=0 // iterator variables
+    int i=0, j=0; // iterator variables
 
-     for(i; i<contours.size(); i++){
-        approxPolyDP(contours[i], output, cv::arcLength(cv::Mat(contours.at(i)), true) * 0.02
-        , bool closed);
+     for(int i; i<contours.size(); i++){
+        approxPolyDP(contours[i], output, cv::arcLength(cv::Mat(contours.at(i)), true) * 0.02, true);
         if(output.size()== num && num == 4){ // if trying to detect higher 4 sided target
-
           for(j; j<output.size(); j++){ // iterate through approxPolyDP output
             totalX += output[j].x; // add all X values of the output to later find average
             totalY += output[j].y; // add all Y values of the output to later find average
           }
-          Point point(total X/= output.size(), totalY /= output.size()); // center point of output
+          Point point(totalX/= output.size(), totalY /= output.size()); // center point of output
 
         if(point.y>maxY){ // checking for highest output
             maxY = point.y; // comparing Y value of all output vectors
@@ -66,4 +64,3 @@ Target targetDetector::processImage(Mat image, int num){}
      waitKey(0);
 
    }
-}

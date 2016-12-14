@@ -9,7 +9,7 @@ using namespace cv;
 class targetDetector{
   public:
     targetDetector();
-    Target processImage(Mat image);
+    std::vector<Point> processImage(Mat image, int num);
   };
 
   #endif

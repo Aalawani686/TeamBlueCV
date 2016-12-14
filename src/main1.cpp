@@ -5,8 +5,9 @@
 #include "targetDetector.hpp"
 #include "target.hpp"
 
+
 #define EPSILON 5 // Minimum error value
-#define CAM_ANGLE 45 // angle of camera on robot
+#define CAM_ANGLE 45.0 // angle of camera on robot
 
 using namespace cv;
 
@@ -22,11 +23,11 @@ int distance_L; // distance_L is the distance between second camera and ending z
                         //when the azimuth_L is 0
 int distance2; // distance2 is the distance of the second camera to the ending zone target
 
-int main(int, char**){
+int main(int argc, char* argv[] ){
   targetDetector tD; // tD is target detector for the first camera
-  targetProcessor tP; // tP is target processor for the first camera
+  TargetProcessing tp; // tP is target processor for the first camera
   targetDetector tD2; // tD2 is target detector for the second camera
-  targetProcessor tP2; // tP2 is target processor for the second camera
+  TargetProcessing tp2; // tP2 is target processor for the second camera
   Target target; // target is generic target for the first camera
   Target target2; // target2 is generic target for the second(back) camera
   Target target_original; // target_original is the target for the intial horizontal target(plus sign)
@@ -51,7 +52,7 @@ int main(int, char**){
       cap2 >> frame2; // get frame from second camera
 
       target_original = Target(tD.processImage(frame, 12)); // make the image of horizontal detection a target
-      tP.loadTarget(target_original);
+      tp.loadTarget(target_original);
       azimuth = tp.Azimuth(); //TODO send to sc
     }
 
@@ -62,7 +63,7 @@ int main(int, char**){
       cap2 >> frame2;
 
       target2 = Target(tD2.processImage(frame2, 12)); // make image of second camera (facing horizontally) into a target
-      tP2.loadTarget(target2);
+      tp2.loadTarget(target2);
       azimuth2 = tp2.Azimuth(); //TODO send to sc in loop
       distance2 = tp2.Distance(); //TODO send to sc in loop
       // TODO Update SC Trigger from Network Tables (Once PID has
@@ -75,7 +76,7 @@ int main(int, char**){
       cap2 >> frame2;
 
       target = Target(tD.processImage(frame, 4)); // look for contours with 4 points to make a rectangular target (higher target)
-      tP.loadTarget(target);
+      tp.loadTarget(target);
       azimuth_H = tp.Azimuth(); // the horizontal azimuth to higher target
       altitude_H = tp.Altitude() + CAM_ANGLE; // vertical altitude angle to higher target
 
@@ -94,7 +95,7 @@ int main(int, char**){
       }
 
       target = Target(tD.processImage(frame, 12)); // look for contours with 4 points to make a plus target (parking zone)
-      tP.loadTarget(target);
+      tp.loadTarget(target);
       azimuth_L = tp.Azimuth(); // the horizontal azimuth to lower parking zone
       altitude_L = CAM_ANGLE - tp.Altitude(); // the vertical altitude angle to lower parking zone
 

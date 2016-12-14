@@ -2,10 +2,10 @@
 
 TargetProcessing::TargetProcessing()
 {
-    objectWidth =
-    focalLength =
-    horizCenter =
-    vertCenter =
+    objectWidth = 0;
+    focalLength = 450;
+    horizCenter = 0;
+    vertCenter = 0;
 
 }
 
@@ -14,14 +14,14 @@ void TargetProcessing::loadTarget(Target target){
   targetCenter = target.getCenter();
 }
 
-double targetProcessing::Distance(){
+double TargetProcessing::Distance(){
   return objectWidth*focalLength/targetWidth;
 }
 
-double targetProcessing::Azimuth(){
+double TargetProcessing::Azimuth(){
   return atan((double) ((targetCenter().x - horizCenter)/focalLength)) * (180/M_PI);
 }
 
-double targetProcessing::Altitude(){
+double TargetProcessing::Altitude(){
   return atan((double) ((targetCenter().y - vertCenter)/focalLength)) * (180/M_PI);
 }

@@ -2,19 +2,21 @@
 #define TARGET_H
 
 #include <iostream>
+#include <vector>
 #include <opencv2/opencv.hpp>
 
 using namespace cv;
 
 class Target{
 public:
-  Target(std::vector<Point> contour);
-  Target();
+  Target() = default;
+  Target(std::vector<Point> c);
   double getHeight();
   double getWidth();
   void printPoints();
   Point getCenter();
 private:
+    std::vector<Point> contours;
     Point getTopPoint();
     Point getBottomPoint();
     Point getLeftPoint();

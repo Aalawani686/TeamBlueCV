@@ -1,27 +1,32 @@
-#include "targetProcessing.hpp"
+#ifndef M_PI
+#define M_PI 3.141592653589793238462643383
+#endif
 
-TargetProcessing::TargetProcessing()
+#include "TargetProcessing.hpp"
+
+TargetProcessing::TargetProcessing(double fl, int imgWidth, int imgHeight):
+focalLength(fl), horizCenter(imgWidth/2), vertCenter(imgHeight/2)
 {
-    objectWidth = 0;
-    focalLength = 450;
-    horizCenter = 0;
-    vertCenter = 0;
 
 }
 
-void TargetProcessing::loadTarget(Target target){
+void ::loadTarget(Target& target, double tgtWidth)
+{
   targetWidth = target.getWidth();
   targetCenter = target.getCenter();
 }
 
-double TargetProcessing::Distance(){
+double TargetProcessing::calcDistance()
+{
   return objectWidth*focalLength/targetWidth;
 }
 
-double TargetProcessing::Azimuth(){
-  return atan((double) ((targetCenter().x - horizCenter)/focalLength)) * (180/M_PI);
+double TargetProcessing::calcAzimuth()
+{
+  return atan((double) ((targetCenter.x - horizCenter)/focalLength)) * (180/M_PI);
 }
 
-double TargetProcessing::Altitude(){
-  return atan((double) ((targetCenter().y - vertCenter)/focalLength)) * (180/M_PI);
+double TargetProcessing::calcAltitude()
+{
+  return atan((double) ((targetCenter.y - vertCenter)/focalLength)) * (180/M_PI);
 }

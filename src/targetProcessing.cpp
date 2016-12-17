@@ -2,7 +2,7 @@
 #define M_PI 3.141592653589793238462643383
 #endif
 
-#include "TargetProcessing.hpp"
+#include "targetProcessing.hpp"
 
 TargetProcessing::TargetProcessing(double fl, int imgWidth, int imgHeight):
 focalLength(fl), horizCenter(imgWidth/2), vertCenter(imgHeight/2)

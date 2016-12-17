@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <memory>
 #include <opencv2/opencv.hpp>
-#include "TargetDetector.hpp"
-#include "Target.hpp"
+#include "targetDetector.hpp"
+#include "target.hpp"
 #include "GUIManager.hpp"
 
 std::unique_ptr<Target> TargetDetector::processImage(const cv::Mat& img, int count, int hueMin, int hueMax, int valMin, int valMax)

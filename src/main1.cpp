@@ -6,9 +6,9 @@
 #include "GUIManager.hpp"
 #include "NetworkController.hpp"
 #include "CmdLineInterface.hpp"
-#include "TargetProcessing.hpp"
-#include "TargetDetector.hpp"
-#include "Target.hpp"
+#include "targetProcessing.hpp"
+#include "targetDetector.hpp"
+#include "target.hpp"
 
 #define EPSILON 5 // Minimum error value
 #define CAM_ANGLE 15.0 // angle of camera on robot

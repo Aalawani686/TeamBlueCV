@@ -2,7 +2,7 @@
 #define TARGET_PROCESSING_HPP
 
 #include <opencv2/opencv.hpp>
-#include "Target.hpp"
+#include "target.hpp"
 using namespace cv;
 
 class TargetProcessing

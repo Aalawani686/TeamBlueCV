@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <opencv2/opencv.hpp>
-#include "Target.hpp"
+#include "target.hpp"
 
 class TargetDetector
 {
